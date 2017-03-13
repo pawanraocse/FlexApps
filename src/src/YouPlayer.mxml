@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark" initialize="initializeHandler(event)">
+
+  <fx:Script><![CDATA[
+    import mx.core.FlexGlobals;
+    import mx.events.FlexEvent;
+    import mx.managers.PopUpManager;
+    import mx.utils.StringUtil;
+
+    private static const YOUTUBE_URL:String = "http://www.youtube.com/v/{0}?version=3&autoplay=1&fs=1&rel=1&controls=2&showinfo=1";
+
+
+    private function play(videoId:String):void {
+      swfLoader.unloadAndStop();
+      swfLoader.source = StringUtil.substitute(YOUTUBE_URL, videoId);
+    }
+
+    private function swfLoader_completeHandler(event:Event):void {
+
+    }
+
+    public function createPopUp(id:String):void {
+      try {
+        PopUpManager.addPopUp(this, (FlexGlobals.topLevelApplication as DisplayObject), true);
+        PopUpManager.centerPopUp(this);
+        play(id);
+      } catch (error:Error) {
+      }
+    }
+
+    private function close_clickHandler():void {
+      PopUpManager.removePopUp(this);
+    }
+
+
+    private function initializeHandler(event:FlexEvent):void {
+      createPopUp("qAM8wEHPccU");
+    }
+    ]]>
+  </fx:Script>
+
+  <s:VGroup id="mainVGroup" gap="0">
+    <s:BorderContainer backgroundColor="#848484"   borderVisible="false" width="100%"
+                       backgroundAlpha=".5" >
+      <s:Image id="closePanel" source="assets/close_icon.png"   right="10" top="3"
+               click="close_clickHandler()"/>
+    </s:BorderContainer>
+    <s:SWFLoader id="swfLoader" complete="swfLoader_completeHandler(event)"
+                 minHeight="390"
+                 minWidth="640"
+                 width="100%"
+                 height="100%"
+                 showBusyCursor="true"
+                 bottom="1"
+                 left="1"
+                 right="1"
+                 top="1"
+                 maintainAspectRatio="true"
+                 scaleContent="false"/>
+  </s:VGroup>
+
+</s:BorderContainer>
