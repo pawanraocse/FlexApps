@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
-               xmlns:s="library://ns.adobe.com/flex/spark" initialize="initializeHandler(event)">
+               xmlns:s="library://ns.adobe.com/flex/spark">
 
   <fx:Script><![CDATA[
     import mx.core.FlexGlobals;
-    import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
     import mx.utils.StringUtil;
 
@@ -14,10 +13,6 @@
     private function play(videoId:String):void {
       swfLoader.unloadAndStop();
       swfLoader.source = StringUtil.substitute(YOUTUBE_URL, videoId);
-    }
-
-    private function swfLoader_completeHandler(event:Event):void {
-
     }
 
     public function createPopUp(id:String):void {
@@ -32,11 +27,6 @@
     private function close_clickHandler():void {
       PopUpManager.removePopUp(this);
     }
-
-
-    private function initializeHandler(event:FlexEvent):void {
-      createPopUp("qAM8wEHPccU");
-    }
     ]]>
   </fx:Script>
 
@@ -46,7 +36,7 @@
       <s:Image id="closePanel" source="assets/close_icon.png"   right="10" top="3"
                click="close_clickHandler()"/>
     </s:BorderContainer>
-    <s:SWFLoader id="swfLoader" complete="swfLoader_completeHandler(event)"
+    <s:SWFLoader id="swfLoader"
                  minHeight="390"
                  minWidth="640"
                  width="100%"

@@ -6,7 +6,7 @@
 
     private static function playButton_clickHandler(event:MouseEvent):void {
       const yt:YouPlayer = new YouPlayer();
-      yt.createPopUp("qAM8wEHPccU");
+      yt.createPopUp("io8gkt3XdPc");
     }
     ]]>
   </fx:Script>
